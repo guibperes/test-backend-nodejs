@@ -17,7 +17,7 @@
     "prettier"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
     "prettier/prettier": "error",
     "import/prefer-default-export": "off",
     "import/extensions": ["error", { "ts": "never" }],
