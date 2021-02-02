@@ -1,5 +1,5 @@
 import { Database } from '../../config';
-import { ApiResponse, IApiResponse } from '../../lib';
+import { ApiResponse, HttpStatus, IApiResponse } from '../../lib';
 import { Category, CategoryService } from '../category';
 import { ProductCreateDTO } from './dto';
 import { Product } from './entity';
@@ -36,4 +36,18 @@ const findAll = async (): Promise<IApiResponse> => {
   return ApiResponse.build(products);
 };
 
-export const ProductService = { create, findAll };
+const findById = async (id: string): Promise<IApiResponse> => {
+  const repository = getProductRepository();
+  const product = await repository.findOne(id);
+
+  if (!product) {
+    return ApiResponse.buildError(
+      'Cannot find product with provided id',
+      HttpStatus.NOT_FOUND
+    );
+  }
+
+  return ApiResponse.build(product);
+};
+
+export const ProductService = { create, findAll, findById };

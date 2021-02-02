@@ -19,4 +19,16 @@ const create = async (req: Request, res: Response) => {
   return ApiResponse.send(res, response);
 };
 
-export const CategoryController = { create };
+const findAll = async (req: Request, res: Response) => {
+  const response = await CategoryService.findAll();
+
+  return ApiResponse.send(res, response);
+};
+
+const findById = async (req: Request, res: Response) => {
+  const response = await CategoryService.findById(req.params.id);
+
+  return ApiResponse.send(res, response);
+};
+
+export const CategoryController = { create, findAll, findById };

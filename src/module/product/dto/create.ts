@@ -1,4 +1,3 @@
-import { ObjectID } from 'typeorm';
 import { Length, Min, IsNotEmpty } from 'class-validator';
 
 export class ProductCreateDTO {
@@ -15,13 +14,13 @@ export class ProductCreateDTO {
   price!: number;
 
   @IsNotEmpty()
-  categoryId!: ObjectID;
+  categoryId!: string;
 
   private constructor(
     title: string,
     description: string,
     price: number,
-    categoryId: ObjectID
+    categoryId: string
   ) {
     this.title = title;
     this.description = description;

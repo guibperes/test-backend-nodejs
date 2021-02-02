@@ -1,5 +1,3 @@
-import { ObjectID } from 'typeorm';
-
 import { Database } from '../../config';
 import { ApiResponse, HttpStatus, IApiResponse } from '../../lib';
 import { CategoryCreateDTO } from './dto';
@@ -19,7 +17,7 @@ const create = async (
   return ApiResponse.build(savedCategory);
 };
 
-const findById = async (id: ObjectID): Promise<IApiResponse> => {
+const findById = async (id: string): Promise<IApiResponse> => {
   const repository = getCategoryRepository();
 
   const category = await repository.findOne(id);
@@ -34,4 +32,11 @@ const findById = async (id: ObjectID): Promise<IApiResponse> => {
   return ApiResponse.build(category);
 };
 
-export const CategoryService = { create, findById };
+const findAll = async (): Promise<IApiResponse> => {
+  const repository = getCategoryRepository();
+  const categories = await repository.find();
+
+  return ApiResponse.build(categories);
+};
+
+export const CategoryService = { create, findById, findAll };

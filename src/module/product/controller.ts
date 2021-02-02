@@ -25,4 +25,10 @@ const findAll = async (req: Request, res: Response) => {
   return ApiResponse.send(res, response);
 };
 
-export const ProductController = { create, findAll };
+const findById = async (req: Request, res: Response) => {
+  const response = await ProductService.findById(req.params.id);
+
+  return ApiResponse.send(res, response);
+};
+
+export const ProductController = { create, findAll, findById };
