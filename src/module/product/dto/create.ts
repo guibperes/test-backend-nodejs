@@ -19,7 +19,7 @@ export class ProductCreateDTO {
     this.price = price;
   }
 
-  public static of(body: ProductCreateDTO) {
+  public static of(body: ProductCreateDTO): ProductCreateDTO {
     return new ProductCreateDTO(body.title, body.description, body.price);
   }
 }

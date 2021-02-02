@@ -1,18 +1,17 @@
 import { Request, Response } from 'express';
-import { validate } from 'class-validator';
 
-import { HttpStatus, ApiResponse } from '../../lib';
+import { HttpStatus, ApiResponse, Validator } from '../../lib';
 import { ProductCreateDTO } from './dto';
 import { ProductService } from './service';
 
 const create = async (req: Request, res: Response) => {
   const productCreateDTO = ProductCreateDTO.of(req.body);
-  const bodyValidation = await validate(productCreateDTO);
+  const bodyHasErrors = await Validator.bodyValidate(productCreateDTO);
 
-  if (bodyValidation.length > 0) {
+  if (bodyHasErrors) {
     return ApiResponse.send(
       res,
-      ApiResponse.buildError(bodyValidation.toString(), HttpStatus.BAD_REQUEST)
+      ApiResponse.buildError(bodyHasErrors, HttpStatus.BAD_REQUEST)
     );
   }
 
