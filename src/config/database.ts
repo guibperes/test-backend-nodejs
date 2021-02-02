@@ -2,7 +2,7 @@ import { ConnectionManager, Connection, ObjectType } from 'typeorm';
 
 import { Env } from './env';
 import { logger } from '../lib';
-import { Product } from '../module';
+import { Product, Category } from '../module';
 
 const manager = new ConnectionManager();
 
@@ -13,7 +13,7 @@ const createConnection = (): Connection =>
     synchronize: true,
     logging: true,
     useUnifiedTopology: true,
-    entities: [Product],
+    entities: [Product, Category],
   });
 
 const getConnection = () => manager.get();
