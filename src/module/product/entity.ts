@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, OneToOne } from 'typeorm';
 import { Length, Min } from 'class-validator';
 
 import { BaseEntity } from '../../base';
@@ -19,8 +19,8 @@ export class Product extends BaseEntity {
   @Min(0)
   price!: number;
 
-  @OneToOne(() => Category, { eager: true })
-  @JoinColumn()
+  @OneToOne(() => Category)
+  @Column(() => Category)
   category!: Category;
 
   private constructor(
