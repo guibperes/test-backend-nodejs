@@ -1,3 +1,32 @@
+# Product Backend API
+
+Backend application created using Node.js 14 and Typescript, used TypeORM as ORM library and Express as HTTP Server.
+
+This application uses environment variables, all variables can be founded at `.env.example` file.
+
+## Instalation
+
+Install dependencies with NPM.
+
+```sh
+npm install
+```
+
+To build from production run.
+```sh
+npm run build
+```
+
+To run application for development run.
+```sh
+npm run dev
+```
+
+To run application in production run after build command.
+```sh
+npm start
+```
+
 <h1>Backend Analyst Candidate Testing</h1>
 
 Hello dear developer, in this test we will analyze your general knowledge and even speed of development. Below we will explain everything that will be needed.
