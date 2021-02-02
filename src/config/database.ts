@@ -1,7 +1,8 @@
-import { ConnectionManager, Connection } from 'typeorm';
+import { ConnectionManager, Connection, ObjectType } from 'typeorm';
 
 import { Env } from './env';
 import { logger } from '../lib';
+import { Product } from '../module/product';
 
 const manager = new ConnectionManager();
 
@@ -12,10 +13,13 @@ const createConnection = (): Connection =>
     synchronize: true,
     logging: true,
     useUnifiedTopology: true,
-    entities: [],
+    entities: [Product],
   });
 
 const getConnection = () => manager.get();
+
+const getRepository = <T>(repositoryClass: ObjectType<T>) =>
+  getConnection().getCustomRepository(repositoryClass);
 
 const connect = async () => {
   try {
@@ -45,4 +49,4 @@ const disconnect = async () => {
   }
 };
 
-export const Database = { getConnection, connect, disconnect };
+export const Database = { connect, disconnect, getRepository, getConnection };
