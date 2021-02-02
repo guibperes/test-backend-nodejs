@@ -4,10 +4,12 @@ import { ProductCreateDTO } from './dto';
 import { Product } from './entity';
 import { ProductRepository } from './repository';
 
+const getProductRepository = () => Database.getRepository(ProductRepository);
+
 const create = async (
   productCreateDTO: ProductCreateDTO
 ): Promise<IApiResponse> => {
-  const repository = Database.getRepository(ProductRepository);
+  const repository = getProductRepository();
 
   const product = Product.of(productCreateDTO);
   const savedProduct = await repository.save(product);
@@ -15,4 +17,11 @@ const create = async (
   return ApiResponse.build(savedProduct);
 };
 
-export const ProductService = { create };
+const findAll = async (): Promise<IApiResponse> => {
+  const repository = getProductRepository();
+  const products = await repository.find();
+
+  return ApiResponse.build(products);
+};
+
+export const ProductService = { create, findAll };

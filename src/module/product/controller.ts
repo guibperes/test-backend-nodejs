@@ -19,4 +19,10 @@ const create = async (req: Request, res: Response) => {
   return ApiResponse.send(res, response);
 };
 
-export const ProductController = { create };
+const findAll = async (req: Request, res: Response) => {
+  const response = await ProductService.findAll();
+
+  return ApiResponse.send(res, response);
+};
+
+export const ProductController = { create, findAll };
