@@ -1,5 +1,6 @@
 import { Database } from '../../config';
 import { ApiResponse, IApiResponse } from '../../lib';
+import { Category, CategoryService } from '../category';
 import { ProductCreateDTO } from './dto';
 import { Product } from './entity';
 import { ProductRepository } from './repository';
@@ -11,9 +12,20 @@ const create = async (
 ): Promise<IApiResponse> => {
   const repository = getProductRepository();
 
-  const product = Product.of(productCreateDTO);
-  const savedProduct = await repository.save(product);
+  const categoryOptional = await CategoryService.findById(
+    productCreateDTO.categoryId
+  );
 
+  if (categoryOptional.error) {
+    return categoryOptional;
+  }
+
+  const product = Product.of(
+    productCreateDTO,
+    <Category>categoryOptional.content
+  );
+
+  const savedProduct = await repository.save(product);
   return ApiResponse.build(savedProduct);
 };
 

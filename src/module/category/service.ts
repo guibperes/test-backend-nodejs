@@ -1,5 +1,7 @@
+import { ObjectID } from 'typeorm';
+
 import { Database } from '../../config';
-import { ApiResponse, IApiResponse } from '../../lib';
+import { ApiResponse, HttpStatus, IApiResponse } from '../../lib';
 import { CategoryCreateDTO } from './dto';
 import { Category } from './entity';
 import { CategoryRepository } from './repository';
@@ -17,4 +19,19 @@ const create = async (
   return ApiResponse.build(savedCategory);
 };
 
-export const CategoryService = { create };
+const findById = async (id: ObjectID): Promise<IApiResponse> => {
+  const repository = getCategoryRepository();
+
+  const category = await repository.findOne(id);
+
+  if (!category) {
+    return ApiResponse.buildError(
+      'Cannot find category with provided id',
+      HttpStatus.NOT_FOUND
+    );
+  }
+
+  return ApiResponse.build(category);
+};
+
+export const CategoryService = { create, findById };

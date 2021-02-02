@@ -10,7 +10,7 @@ const createConnection = (): Connection =>
   manager.create({
     type: 'mongodb',
     url: Env.MONGO_URL,
-    synchronize: true,
+    synchronize: false,
     logging: true,
     useUnifiedTopology: true,
     entities: [Product, Category],
