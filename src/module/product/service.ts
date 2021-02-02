@@ -50,4 +50,16 @@ const findById = async (id: string): Promise<IApiResponse> => {
   return ApiResponse.build(product);
 };
 
-export const ProductService = { create, findAll, findById };
+const deleteById = async (id: string): Promise<IApiResponse> => {
+  const repository = getProductRepository();
+  const productOptional = await findById(id);
+
+  if (productOptional.error) {
+    return productOptional;
+  }
+
+  await repository.delete(id);
+  return ApiResponse.build({ deleted: true });
+};
+
+export const ProductService = { create, findAll, findById, deleteById };

@@ -31,4 +31,10 @@ const findById = async (req: Request, res: Response) => {
   return ApiResponse.send(res, response);
 };
 
-export const ProductController = { create, findAll, findById };
+const deleteById = async (req: Request, res: Response) => {
+  const response = await ProductService.deleteById(req.params.id);
+
+  return ApiResponse.send(res, response);
+};
+
+export const ProductController = { create, findAll, findById, deleteById };
