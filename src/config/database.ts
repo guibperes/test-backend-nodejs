@@ -2,7 +2,7 @@ import { ConnectionManager, Connection, ObjectType } from 'typeorm';
 
 import { Env } from './env';
 import { logger } from '../lib';
-import { Product } from '../module/product';
+import { Product } from '../module';
 
 const manager = new ConnectionManager();
 

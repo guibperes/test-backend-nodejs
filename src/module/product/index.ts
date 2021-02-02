@@ -1,2 +1,2 @@
 export { Product } from './entity';
-export { ProductController } from './controller';
+export { ProductRoutes } from './routes';
