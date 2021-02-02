@@ -27,6 +27,16 @@ To run application in production run after build command.
 npm start
 ```
 
+To build the docker container run
+```sh
+docker image build -t $IMAGE_NAME .
+```
+
+To run the docker container at detached mode run
+```sh
+docker container run --name $CONTAINER_NAME -p 5000:5000 -e MONGO_URL=$DATABASE_URL -d $IMAGE_NAME
+```
+
 <h1>Backend Analyst Candidate Testing</h1>
 
 Hello dear developer, in this test we will analyze your general knowledge and even speed of development. Below we will explain everything that will be needed.
